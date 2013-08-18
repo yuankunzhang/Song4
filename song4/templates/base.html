@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{%- block head_meta %}
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="description" content="Song For Us">
+	{% endblock -%}
+
+	{% block css_files %}
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+	<link rel="stylesheet" href="/static/css/base.css">
+	{% endblock -%}
+
+	{% block css_snippets %}
+	{% endblock -%}
+
+	{% block js_files %}
+	<script src="/static/js/lib/jquery-1.10.2.min.js"></script>
+	{% endblock -%}
+</head>
+
+<body>
+	<div class="container">
+	{% block content %}
+	{% endblock %}
+	</div>
+</body>
+</html>

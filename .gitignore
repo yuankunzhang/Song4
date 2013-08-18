@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+requirements.txt
+
+venv/
+song4/static/uploads
+song4/logs/

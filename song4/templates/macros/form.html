@@ -1,0 +1,23 @@
+{% macro stacked_form(endpoint, method='post') %}
+<form action="{{ url_for(endpoint, **kwargs) }}" class="pure-form pure-form-stacked" method="{{ method }}">
+	{{ caller() }}
+</form>
+{% endmacro %}
+
+
+{% macro input_field(field, class='') %}
+<div class="pure-control-group{% if field.errors %} error{% endif %}">
+	{{ field.label }}
+	{{ field }}
+	{% if field.errors %}
+	<span class="error-tip">{{ ' '.join(field.errors) }}</span>
+	{% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro button(value, type='primary') %}
+	<div class="pure-controls">
+		<button type="submit" class="pure-button pure-button-{{ type }}">{{ value }}</button>
+	</div>
+{% endmacro %}
