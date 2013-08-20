@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, redirect, \
     render_template, url_for
+from flask.ext.login import login_user
 from werkzeug import generate_password_hash
 
 from song4.ext import db
 from .models import User
-from .forms import SignUpForm
+from .forms import SignInForm, SignUpForm
 
 bp = Blueprint('account', __name__)
 
@@ -19,7 +20,18 @@ def index():
 @bp.route('/signin/', methods=['GET', 'POST'])
 def signin():
 
-    pass
+    form = SignInForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        user, auth = User.authenticate(form.email.data,
+                                       form.password.data)
+        if auth:
+            login_user(user)
+            return redirect(url_for('frontend.index'))
+        else:
+            form.password.errors = (u'Wrong password',)
+
+    return render_template('account/signin.html', form=form)
 
 
 @bp.route('/signup/', methods=['GET', 'POST'])

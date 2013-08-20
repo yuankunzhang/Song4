@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block css_snippets %}
+<style type="text/css" media="screen">
+#editor {
+	position: absolute;
+	top: 30px;
+	right: 160px;
+	bottom: 0;
+	left: 160px;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+/* Hide line number */
+.ace_gutter {
+	display: none;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="editor"></div>
+
+<script src="/static/plugins/ace/ace.js"></script>
+<script>
+	var editor = ace.edit("editor");
+	editor.getSession().setMode("ace/mode/markdown");
+	editor.getSession().setUseWrapMode(true);
+	editor.setHighlightActiveLine(false);	// Don't highlight the active line.
+	editor.setShowPrintMargin(false);		// Don't show the print margin.
+</script>
+{% endblock %}

@@ -30,6 +30,7 @@
 	border-color: #dd514c;
 }
 
+/* turn off error displays of forms. */
 .error span.error-tip {
 	display: none;
 }

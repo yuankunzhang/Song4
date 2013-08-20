@@ -30,7 +30,6 @@ a:focus {
 }
 
 .header {
-	font-family: Maven Pro, sans-serif;
     margin: 50% 2em 0;
     text-align: right;
 }
@@ -72,8 +71,8 @@ a:focus {
 
 #signin-btn {
 	position: absolute;
-	bottom: 2em;
-	right: 3em;
+	bottom: 20px;
+	right: 40px;
 }
 
 .content-subhead {

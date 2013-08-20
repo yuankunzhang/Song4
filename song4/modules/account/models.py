@@ -47,7 +47,7 @@ class User(db.Model):
 
     @classmethod
     def authenticate(cls, email, password):
-        user = cls.query.get_by_email(email=email).first()
+        user = cls.query.get_by_email(email=email)
         if user:
             auth = user._check_password(password)
         else:

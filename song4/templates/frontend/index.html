@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="pure-g-r" id="layout">
-	<div class="sidebar pure-u">
+    <div class="sidebar pure-u">
 		<header class="header">
 			<hgroup>
 				<h1 class="brand-title">Song 4</h1>
@@ -29,13 +29,13 @@
 				</ul>
 			</nav>
 
-			<a id="signin-btn" class="pure-button" href="#">Sign in</a>
+			<a id="signin-btn" class="pure-button" href="{{ url_for('account.signin') }}">Sign in</a>
 		</header>
-</div>
+    </div>
 
-	<div class="pure-u-1">
-		<div class="content">
-			<!-- A wrapper for all the blog posts -->
+    <div class="pure-u-1">
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
             <div class="posts">
                 <h1 class="content-subhead">Pinned Post</h1>
 
@@ -154,8 +154,8 @@
                     </ul>
                 </div>
             </footer>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
@@ -168,5 +168,4 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
     }, 'a[href="#"]');
 });
 </script>
-
 {% endblock %}

@@ -4,7 +4,7 @@ from mongokit import Connection
 
 from .config import DefaultConfig
 from .ext import db, login_manager
-from .modules import frontend, account
+from .modules import frontend, account, blog
 
 __all__ = ['create_app']
 
@@ -13,6 +13,7 @@ APP_NAME = 'song4'
 MODULES = (
     (frontend.bp, ''),
     (account.bp, '/u'),
+    (blog.bp, '/blog'),
 )
 
 

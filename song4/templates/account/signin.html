@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block css_snippets %}
+<style type="text/css">
+	body {
+		background: url(/static/img/background.gif) repeat 0 0;
+	}
+
+	.container {
+		background-color: white;
+		margin: 80px auto;
+		max-width: 300px;
+		border: 1px solid #ccc;
+		padding: 20px 30px;
+
+		border-radius: 6px;
+		box-shadow: 1px 1px 5px #bbb;
+	}
+
+	.pure-control-group, .pure-controls {
+		margin-top: 16px;
+	}
+
+	.pure-control-group input[type=text],
+	.pure-control-group input[type=password] {
+		height: 36px;
+		font-size: 20px;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+{% from 'macros/form.html' import stacked_form, input_field, button %}
+{% call stacked_form('account.signin') %}
+	<legend>Sign up a new account.</legend>
+	{{ input_field(form.email) }}
+	{{ input_field(form.password) }}
+	{{ button('Sign in', type='success') }}
+{% endcall %}
+{% endblock %}
