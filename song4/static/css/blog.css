@@ -1,0 +1,31 @@
+#controls {
+	position: fixed;
+	width: 300px;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	background-color: #ccc;
+}
+
+#editor {
+	position: absolute;
+	width: 860px;
+	top: 40px;
+	bottom: 0;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+#title-indicator {
+	position: absolute;
+	width: 880px;
+	height: 1px;
+	top: 69px;
+	background-color: #ececec;
+}
+
+/* Hide line number */
+.ace_gutter {
+	display: none;
+}
