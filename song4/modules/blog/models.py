@@ -2,9 +2,11 @@
 import datetime
 
 from flask.ext.sqlalchemy import BaseQuery
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from song4.ext import db
 from .consts import PostStatus, PostAccess
+from ..tag.models import Tag
 
 
 class PostQuery(BaseQuery):
@@ -36,11 +38,14 @@ class Post(db.Model):
 
     author = db.relationship(
         'User', backref=db.backref('posts', cascade='all, delete-orphan'))
+    tags = association_proxy('post_tags', 'tag')
 
-    def __init__(self, title, content, access):
-        self.title = title
-        self.content = content
+    def __init__(self, content, access=PostAccess.PUBLIC):
+        heading_line = content.split('\n', 1)[0]
+        self.title = heading_line[1:].strip()
+        self.content = content[len(heading_line):].strip()
         self.access = access
+        self.author_id = 2
 
     def __repr__(self):
         return '<Post(%r)>' % self.title
@@ -62,4 +67,13 @@ class Post(db.Model):
         """Make an existing post published"""
         self.date_published = datetime.datetime.utcnow()
         self.status = PostStatus.PUBLISHED
+        db.session.commit()
+
+    def add_tags(self, tag_names):
+        for name in tag_names:
+            tag = Tag.create_or_update(name)
+
+            if tag not in self.tags:
+                self.tags.append(tag)
+
         db.session.commit()

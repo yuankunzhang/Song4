@@ -14,14 +14,14 @@
 	top: 40px;
 	bottom: 0;
 	font-size: 16px;
-	line-height: 30px;
+	line-height: 26px;
 }
 
 #title-indicator {
 	position: absolute;
 	width: 880px;
 	height: 1px;
-	top: 69px;
+	top: 65px;
 	background-color: #ececec;
 }
 

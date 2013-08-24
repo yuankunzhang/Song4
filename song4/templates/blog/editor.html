@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
 {% block css_files %}
+{{ super() }}
 <link rel="stylesheet" type="text/css" href="/static/css/blog.css">
 {% endblock %}
 
 {% block content %}
 <div id="controls">
 	<div>Controls</div>
+	<div>
+		<span>Tags</span>
+		<input type="text" name="tags">
+		<input type="hidden" name="post_id">
+	</div>
+	<div><button id="publish-btn" class="pure-button">Publish</button></div>
 </div>
 <div id="editor"></div>
 <div id="title-indicator"></div>

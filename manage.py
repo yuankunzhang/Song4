@@ -11,6 +11,8 @@ from flask.ext.script import Manager
 from song4 import create_app
 from song4.ext import db
 from song4.modules.account.models import User
+from song4.modules.blog.models import Post
+from song4.modules.tag.models import Tag, PostTags
 
 manager = Manager(create_app)
 

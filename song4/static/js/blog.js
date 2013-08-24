@@ -1,7 +1,23 @@
+var publish_url = '/blog/publish';
 var editor, controls;
 var c_hidden_left = -270;
 var c_toggle_duration = 800;
 
+
+function publish_post() {
+	var content = editor.getSession().getValue();
+	var tags = $('input[name=tags]').val();
+	var post_id = $('input[name=post_id]').val();
+
+	$.post(
+		publish_url,
+		{'content': content, 'tags': tags, 'post_id': post_id},
+		function(data) {
+			if (data.status == 'ok') {
+				window.location = publish_url;
+		}
+	});
+}
 
 function show_controls() {
 	if (controls.position().left == c_hidden_left) {
@@ -55,6 +71,8 @@ function init_page() {
 		hide_controls();
 		controls.mouseenter(show_controls);
 		controls.mouseleave(hide_controls);
+
+		$('#publish-btn').click(publish_post);
 	});
 
 	window.onresize = make_editor_center;
