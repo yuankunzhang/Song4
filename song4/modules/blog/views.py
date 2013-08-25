@@ -16,26 +16,24 @@ def editor():
     return render_template('blog/editor.html')
 
 
-@bp.route('/publish', methods=['GET', 'POST'])
+@bp.route('/publish', methods=['POST'])
 @login_required
 def publish():
-    if request.method == 'POST':
-        post_id = request.form['post_id']
-        content = request.form['content']
-        tags = str2list(request.form['tags'])
-        access = request.form['access']
+    post_id = request.form['post_id']
+    content = request.form['content']
+    tags = str2list(request.form['tags'])
+    access = request.form['access']
 
-        if not post_id:     # new post
-            post = Post(content, access)
-            post.create()
-            post.add_tags(tags)
-            post.publish()
-        else:
-            post = Post.query.get(post_id)
-            post.update()
-        return jsonify(status='ok');
+    if not post_id:     # new post
+        post = Post(content, access)
+        post.create()
+        post.add_tags(tags)
+        post.publish()
     else:
-        return 'Good'
+        post = Post.query.get(post_id)
+        post.update(content, access, tags)
+        post.publish()
+    return jsonify(status='ok');
 
 
 @bp.route('/save', methods=['POST'])
@@ -52,6 +50,6 @@ def save():
         post.add_tags(tags)
     else:
         post = Post.query.get(post_id)
-        post.update(content, access, sags)
+        post.update(content, access, tags)
 
     return jsonify(status='ok', post_id=post.id)

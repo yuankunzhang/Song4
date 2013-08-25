@@ -29,13 +29,14 @@
 	width: 60px;
 }
 
-#controls form .pure-controls {
+#controls #publish-btn {
 	margin-left: 80px;
 }
 
 #editor {
 	position: absolute;
 	width: 860px;
+	height: 100%;
 	top: 50px;
 	bottom: 0;
 	font-size: 16px;

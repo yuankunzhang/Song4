@@ -23,7 +23,7 @@ function publish_post() {
 		},
 		function(data) {
 			if (data.status == 'ok') {
-				window.location = publish_url;
+				window.location = '/';
 		}
 	});
 }
@@ -95,6 +95,13 @@ function run_editor() {
 	editor.setShowPrintMargin(false);		// Don't show the print margin.
 	editor.getSession().setMode("ace/mode/markdown");
 	editor.getSession().setUseWrapMode(true);
+	editor.getSession().on('change', function() {
+		var newHeight = editor.getSession().getScreenLength() *
+			editor.renderer.lineHeight +
+			editor.renderer.scrollBar.getWidth();
+		$('#editor').height(newHeight.toString() + 'px');
+		editor.resize();
+	});
 }
 
 function init_page() {
