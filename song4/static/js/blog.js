@@ -1,22 +1,57 @@
 var publish_url = '/blog/publish';
+var save_url = '/blog/save';
+
 var editor, controls;
-var c_hidden_left = -270;
-var c_toggle_duration = 800;
+var c_hidden_left = -250;		// 控制栏隐藏的距离
+var c_toggle_duration = 800;	// 控制栏淡入/淡出时间
+var s_interval = 60000;			// 自动保存时间间隔
 
 
 function publish_post() {
 	var content = editor.getSession().getValue();
 	var tags = $('input[name=tags]').val();
+	var access = $('select[name=access]').val();
 	var post_id = $('input[name=post_id]').val();
 
 	$.post(
 		publish_url,
-		{'content': content, 'tags': tags, 'post_id': post_id},
+		{
+			'content': content,
+			'tags': tags,
+			'access': access,
+			'post_id': post_id
+		},
 		function(data) {
 			if (data.status == 'ok') {
 				window.location = publish_url;
 		}
 	});
+}
+
+function save_post() {
+	var content = editor.getSession().getValue();
+	var tags = $('input[name=tags]').val();
+	var access = $('select[name=access]').val();
+	var post_id = $('input[name=post_id]').val();
+
+	if (content.trim()) {
+		$.post(
+			save_url,
+			{
+				'content': content,
+				'tags': tags,
+				'access': access,
+				'post_id': post_id
+			},
+			function(data) {
+				if (data.status == 'ok') {
+					if (!post_id) {
+						$('input[name=post_id]').val(data.post_id);
+					}
+			}
+		});
+		$('#save-indicator').fadeIn().delay(2000).fadeOut();
+	}
 }
 
 function show_controls() {
@@ -48,6 +83,7 @@ function hide_controls() {
 function make_editor_center() {
 	var left = ($(document).width() - $('#editor').width()) / 2;
 	$('#editor').css({'left': left + 'px'});
+	$('#save-indicator').css({'left': left + 'px'});
 
 	left = ($(document).width() - $('#title-indicator').width()) / 2;
 	$('#title-indicator').css({'left': left + 'px'});
@@ -73,6 +109,7 @@ function init_page() {
 		controls.mouseleave(hide_controls);
 
 		$('#publish-btn').click(publish_post);
+		setInterval(save_post, s_interval);
 	});
 
 	window.onresize = make_editor_center;

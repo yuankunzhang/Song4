@@ -1,17 +1,42 @@
+#save-indicator {
+	position: fixed;
+	top: 10px;
+	font-size: 14px;
+	padding: 4px 6px;
+	color: #fff;
+	background-color: #5aba59;
+	display: none;
+	border-radius: 4px;
+}
+
 #controls {
 	position: fixed;
-	width: 300px;
+	width: 280px;
 	height: 100%;
 	top: 0;
 	left: 0;
+	padding-top: 20px;
 	z-index: 999;
-	background-color: #ccc;
+	background-color: #eee;
+	border-right: 1px solid #ccc;
+}
+
+#controls form legend {
+	text-align: center;
+}
+
+#controls form label {
+	width: 60px;
+}
+
+#controls form .pure-controls {
+	margin-left: 80px;
 }
 
 #editor {
 	position: absolute;
 	width: 860px;
-	top: 40px;
+	top: 50px;
 	bottom: 0;
 	font-size: 16px;
 	line-height: 26px;
@@ -21,7 +46,7 @@
 	position: absolute;
 	width: 880px;
 	height: 1px;
-	top: 65px;
+	top: 75px;
 	background-color: #ececec;
 }
 

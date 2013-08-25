@@ -6,14 +6,33 @@
 {% endblock %}
 
 {% block content %}
+<span id="save-indicator">已自动保存...</span>
 <div id="controls">
-	<div>Controls</div>
-	<div>
-		<span>Tags</span>
-		<input type="text" name="tags">
-		<input type="hidden" name="post_id">
-	</div>
-	<div><button id="publish-btn" class="pure-button">Publish</button></div>
+	<form class="pure-form pure-form-aligned">
+		<fieldset>
+			<legend>Meta Data</legend>
+
+			<div class="pure-control-group">
+				<label for="tags">Tags</label>
+				<input id="tags" type="text" name="tags">
+			</div>
+
+			<div class="pure-control-group">
+				<label for="access">Access</label>
+				<select id="access" name="access">
+					<option value="0">Public</option>
+					<option value="1">Private</option>
+				</select>
+			</div>
+
+			<input type="hidden" name="post_id">
+			<legend></legend>
+
+			<div class="pure-controls">
+				<button id="publish-btn" class="pure-button pure-button-primary">Publish</button>
+			</div>
+		</fieldset>
+	</form>
 </div>
 <div id="editor"></div>
 <div id="title-indicator"></div>

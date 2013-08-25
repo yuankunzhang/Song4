@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, redirect, \
     render_template, url_for
-from flask.ext.login import login_user
+from flask.ext.login import login_user, login_required
 from werkzeug import generate_password_hash
 
 from song4.ext import db
@@ -49,6 +49,7 @@ def signup():
 
 
 @bp.route('/signout/')
+@login_required
 def signout():
 
     pass

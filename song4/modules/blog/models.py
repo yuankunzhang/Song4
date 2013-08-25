@@ -2,6 +2,7 @@
 import datetime
 
 from flask.ext.sqlalchemy import BaseQuery
+from flask.ext.login import current_user
 from sqlalchemy.ext.associationproxy import association_proxy
 
 from song4.ext import db
@@ -11,7 +12,14 @@ from ..tag.models import Tag
 
 class PostQuery(BaseQuery):
 
-    pass
+    def public_posts(self):
+        return self.filter_by(status=PostStatus.PUBLISHED,
+                              access=PostAccess.PUBLIC).\
+            order_by(Post.date_published.desc())
+
+    def drafts(self, author_id):
+        return self.filter_by(status=PostStatus.DRAFT,
+                              author_id=author_id)
 
 
 class Post(db.Model):
@@ -45,7 +53,7 @@ class Post(db.Model):
         self.title = heading_line[1:].strip()
         self.content = content[len(heading_line):].strip()
         self.access = access
-        self.author_id = 2
+        self.author_id = current_user.id
 
     def __repr__(self):
         return '<Post(%r)>' % self.title
@@ -54,13 +62,30 @@ class Post(db.Model):
         """Create a new post in database"""
         self.date_created = datetime.datetime.utcnow()
         self.status = PostStatus.DRAFT
+
         db.session.add(self)
         db.session.commit()
 
-    def update(self):
+    def update(self, content, access=PostAccess.PUBLIC, tag_names=None):
         """Edit an existing post"""
         self.date_modified = datetime.datetime.utcnow()
-        # Do the changes.
+
+        heading_line = content.split('\n', 1)[0]
+        self.title = heading_line[1:].strip()
+        self.content = content[len(heading_line):].strip()
+        self.access = access
+
+        old_tags = [tag for tag in self.tags]
+        old_tag_names = [tag.name for tag in self.tags]
+
+        for tag in old_tags:
+            if tag.name not in tag_names:
+                self.tags.remove(tag)
+
+        for name in tag_names:
+            if name not in old_tag_names:
+                self.tags.append(Tag.create_or_update(name))
+
         db.session.commit()
 
     def publish(self):

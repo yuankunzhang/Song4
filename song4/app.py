@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, render_template
-from mongokit import Connection
 
 from .config import DefaultConfig
 from .ext import db, login_manager
+from .filters import add_filters
 from .modules import frontend, account, blog
 
 __all__ = ['create_app']
@@ -27,6 +27,7 @@ def create_app(config=None,
     config_app(app, config)
     config_ext(app)
     config_err(app)
+    config_filters(app)
     config_modules(app, modules)
 
     return app
@@ -56,6 +57,11 @@ def config_err(app):
         if request.is_xhr:
             return jsonify(error='404 page not found')
         return render_template('error.html', error=error)
+
+
+def config_filters(app):
+    """Attach custom template filters."""
+    add_filters(app)
 
 
 def config_modules(app, modules):

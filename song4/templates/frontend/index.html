@@ -3,7 +3,8 @@
 {% block css_files %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Maven+Pro">
-<link rel="stylesheet" href="/static/css/frontend.css">
+<link rel="stylesheet" type="text/css" href="/static/css/frontend.css">
+<link rel="stylesheet" type="text/css" href="/static/plugins/google-code-prettify/prettify.css">
 {% endblock %}
 
 {% block content %}
@@ -37,6 +38,21 @@
         <div class="content">
             <!-- A wrapper for all the blog posts -->
             <div class="posts">
+				{% for post in posts %}
+				<section class="post">
+					<header class="post-header">
+						<h1 class="post-title">{{ post.title }}</h1>
+						<p class="post-meta">
+							By {{ post.author }}
+						</p>
+					</header>
+
+					<div class="post-description">
+						{{ post.content|markdown|preview }}
+					</div>
+				</section>
+				{% endfor %}
+
                 <h1 class="content-subhead">Pinned Post</h1>
 
                 <!-- A single blog post -->
@@ -159,6 +175,7 @@
 </div>
 
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+<script src="/static/plugins/google-code-prettify/prettify.js"></script>
 <script>
 YUI().use('node-base', 'node-event-delegate', function (Y) {
     // This just makes sure that the href="#" attached to the <a> elements
@@ -167,5 +184,8 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
         e.preventDefault();
     }, 'a[href="#"]');
 });
+
+$('code').parent('pre').attr('class', 'prettyprint linenums');
+prettyPrint();
 </script>
 {% endblock %}
