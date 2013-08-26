@@ -9,30 +9,7 @@
 
 {% block content %}
 <div class="pure-g-r" id="layout">
-    <div class="sidebar pure-u">
-		<header class="header">
-			<hgroup>
-				<h1 class="brand-title">Song 4</h1>
-				<h2 class="brand-tagline">Creating a blog layout using Pure</h2>
-			</hgroup>
-
-			<nav class="nav">
-				<ul class="nav-list">
-					<li class="nav-item">
-						<a class="pure-button" href="#">Blog</a>
-					</li>
-					<li class="nav-item">
-						<a class="pure-button" href="#">Algorithm</a>
-					</li>
-					<li class="nav-item">
-						<a class="pure-button" href="#">About</a>
-					</li>
-				</ul>
-			</nav>
-
-			<a id="signin-btn" class="pure-button" href="{{ url_for('account.signin') }}">Sign in</a>
-		</header>
-    </div>
+	{% include 'frontend/sidebar.html' %}
 
     <div class="pure-u-1">
         <div class="content">
@@ -48,7 +25,7 @@
 					</header>
 
 					<div class="post-description">
-						{{ post.content|markdown|preview }}
+						{{ post.content|markdown }}
 					</div>
 				</section>
 				{% endfor %}
@@ -174,9 +151,10 @@
     </div>
 </div>
 
-<script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+<!--<script src="/static/js/lib/yui-min.js"></script>-->
 <script src="/static/plugins/google-code-prettify/prettify.js"></script>
 <script>
+/*
 YUI().use('node-base', 'node-event-delegate', function (Y) {
     // This just makes sure that the href="#" attached to the <a> elements
     // don't scroll you back up the page.
@@ -184,6 +162,7 @@ YUI().use('node-base', 'node-event-delegate', function (Y) {
         e.preventDefault();
     }, 'a[href="#"]');
 });
+*/
 
 $('code').parent('pre').attr('class', 'prettyprint linenums');
 prettyPrint();
