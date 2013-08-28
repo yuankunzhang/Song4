@@ -14,6 +14,7 @@ MODULES = (
     (frontend.bp, ''),
     (account.bp, '/u'),
     (blog.bp, '/blog'),
+    (comment.bp, '/comment'),
 )
 
 

@@ -9,14 +9,14 @@ from .models import Post
 bp = Blueprint('blog', __name__)
 
 
-@bp.route('/editor')
+@bp.route('/editor/')
 @login_required
 def editor():
 
     return render_template('blog/editor.html')
 
 
-@bp.route('/publish', methods=['POST'])
+@bp.route('/publish/', methods=['POST'])
 @login_required
 def publish():
     post_id = request.form['post_id']
@@ -36,7 +36,7 @@ def publish():
     return jsonify(status='ok');
 
 
-@bp.route('/save', methods=['POST'])
+@bp.route('/save/', methods=['POST'])
 @login_required
 def save():
     post_id = request.form['post_id']
@@ -55,7 +55,7 @@ def save():
     return jsonify(status='ok', post_id=post.id)
 
 
-@bp.route('/<id>', methods=['GET'])
+@bp.route('/<id>/', methods=['GET'])
 def entry(id):
     post = Post.query.get_or_404(id)
 
