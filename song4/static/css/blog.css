@@ -55,3 +55,8 @@
 .ace_gutter {
 	display: none;
 }
+
+#comment-box textarea {
+	width: 50%;
+	height: 120px;
+}

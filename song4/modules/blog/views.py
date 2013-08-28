@@ -53,3 +53,10 @@ def save():
         post.update(content, access, tags)
 
     return jsonify(status='ok', post_id=post.id)
+
+
+@bp.route('/<id>', methods=['GET'])
+def entry(id):
+    post = Post.query.get_or_404(id)
+
+    return render_template('blog/entry.html', post=post)

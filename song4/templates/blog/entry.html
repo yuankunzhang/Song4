@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block css_files %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Maven+Pro">
+<link rel="stylesheet" type="text/css" href="/static/css/frontend.css">
+<link rel="stylesheet" type="text/css" href="/static/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/static/plugins/google-code-prettify/prettify.css">
+{% endblock %}
+
+{% block content %}
+<div class="pure-g-r" id="layout">
+	<div class="sidebar pure-u">
+		{% include 'frontend/sidebar.html' %}
+	</div>
+
+    <div class="pure-u-1">
+        <div class="content">
+            <div class="posts">
+				<section class="post">
+					<header class="post-header">
+						<h1 class="post-title">{{ post.title }}</h1>
+						<p class="post-meta">
+							By {{ post.author }}
+						</p>
+					</header>
+
+					<div class="post-description">
+						{{ post.content|markdown }}
+					</div>
+				</section>
+            </div>
+
+			<div class="comments">
+				<div id="comment-box">
+					<form class="pure-form pure-form-stacked">
+						<input type="text" name="email" class="pure-input-1-4" placeholder="Your email">
+						<input type="text" name="email" class="pure-input-1-4" placeholder="Your website">
+						<textarea name="content" placeholder="Leave a comment..."></textarea>
+						<button class="pure-button pure-button-primary">Submit</button>
+					</form>
+				</div>
+			</div>
+
+            <footer class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul>
+                        <li><a href="http://purecss.io/">About</a></li>
+                        <li><a href="http://twitter.com/yuilibrary/">Twitter</a></li>
+                        <li><a href="http://github.com/yui/pure/">Github</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!--<script src="/static/js/lib/yui-min.js"></script>-->
+<script src="/static/plugins/google-code-prettify/prettify.js"></script>
+<script>
+/*
+YUI().use('node-base', 'node-event-delegate', function (Y) {
+    // This just makes sure that the href="#" attached to the <a> elements
+    // don't scroll you back up the page.
+    Y.one('body').delegate('click', function (e) {
+        e.preventDefault();
+    }, 'a[href="#"]');
+});
+*/
+
+$('code').parent('pre').attr('class', 'prettyprint linenums');
+prettyPrint();
+</script>
+{% endblock %}
