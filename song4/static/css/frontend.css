@@ -69,12 +69,6 @@ a:focus {
     text-decoration: none;
 }
 
-#signin-btn {
-	position: absolute;
-	bottom: 20px;
-	right: 40px;
-}
-
 .content-subhead {
     text-transform: uppercase;
     color: #aaa;

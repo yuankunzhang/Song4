@@ -14,23 +14,28 @@
 
 			<div class="pure-control-group">
 				<label for="tags">Tags</label>
-				<input id="tags" type="text" name="tags">
+				<input id="tags" type="text" name="tags"{% if post %} value="{{ post.tag_str }}"{% endif %}>
 			</div>
 
 			<div class="pure-control-group">
 				<label for="access">Access</label>
-				<select id="access" name="access">
+				<select id="access" name="access"{% if post %} value="{{ post.access }}"{% endif %}>
 					<option value="0">Public</option>
 					<option value="1">Private</option>
 				</select>
 			</div>
 
-			<input type="hidden" name="post_id">
+			<input type="hidden" name="post_id"{% if post %} value="{{ post.id }}"{% endif %}>
+			<input type="hidden" name="content"{% if post %} value="{{ post.title + post.content }}"{% endif %}>
 			<legend></legend>
 		</fieldset>
 	</form>
 
-	<button id="publish-btn" class="pure-button pure-button-primary">Publish</button>
+	{% if not post %}
+		<button id="publish-btn" class="pure-button pure-button-primary">Publish</button>
+	{% else %}
+		<button id="update-btn" class="pure-button pure-button-primary">Update</button>
+	{% endif %}
 </div>
 <div id="editor"></div>
 <div id="title-indicator"></div>
@@ -38,6 +43,6 @@
 <script src="/static/plugins/ace/ace.js"></script>
 <script src="/static/js/blog.js"></script>
 <script>
-	init_page();
+	init_page($('input[name=content]').val());
 </script>
 {% endblock %}

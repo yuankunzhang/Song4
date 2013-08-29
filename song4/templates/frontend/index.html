@@ -20,7 +20,7 @@
 				{% for post in posts %}
 				<section class="post">
 					<header class="post-header">
-					<h1 class="post-title"><a href="{{ url_for('blog.entry', id=post.id) }}">{{ post.title }}</a></h1>
+					<h1 class="post-title"><a href="{{ url_for('blog.entry', post_id=post.id) }}">{{ post.title }}</a></h1>
 						<p class="post-meta">
 							By {{ post.author }}
 						</p>

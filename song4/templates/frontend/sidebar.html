@@ -15,8 +15,11 @@
 			<li class="nav-item">
 				<a class="pure-button" href="#">About</a>
 			</li>
+			<li class="nav-item">
+				{% if not current_user.is_authenticated() %}
+				<a class="pure-button" href="#">Sign in</a>
+				{% endif %}
+			</li>
 		</ul>
 	</nav>
-
-	<a id="signin-btn" class="pure-button" href="{{ url_for('account.signin') }}">Sign in</a>
 </header>

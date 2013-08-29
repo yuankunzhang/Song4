@@ -102,3 +102,7 @@ class Post(db.Model):
                 self.tags.append(tag)
 
         db.session.commit()
+
+    @property
+    def tag_str(self):
+        return ', '.join([i.name for i in self.tags])

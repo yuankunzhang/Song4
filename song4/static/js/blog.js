@@ -89,33 +89,44 @@ function make_editor_center() {
 	$('#title-indicator').css({'left': left + 'px'});
 }
 
-function run_editor() {
-	editor = ace.edit("editor");
-	editor.setHighlightActiveLine(false);	// Don't highlight the active line.
-	editor.setShowPrintMargin(false);		// Don't show the print margin.
-	editor.getSession().setMode("ace/mode/markdown");
-	editor.getSession().setUseWrapMode(true);
-	editor.getSession().on('change', function() {
+function resize_editor() {
 		var newHeight = editor.getSession().getScreenLength() *
 			editor.renderer.lineHeight +
 			editor.renderer.scrollBar.getWidth();
 		$('#editor').height(newHeight.toString() + 'px');
 		editor.resize();
-	});
 }
 
-function init_page() {
+function run_editor(content) {
+	editor = ace.edit("editor");
+	editor.setHighlightActiveLine(false);	// Don't highlight the active line.
+	if (content) {
+		editor.getSession().setValue(content);
+		resize_editor();
+	}
+
+	editor.setShowPrintMargin(false);		// Don't show the print margin.
+	editor.getSession().setMode("ace/mode/markdown");
+	editor.getSession().setUseWrapMode(true);
+	editor.getSession().on('change', resize_editor);
+}
+
+function init_page(content) {
 	$(document).ready(function() {
 		controls = $('#controls');
 
-		run_editor();
+		run_editor(content);
 		make_editor_center();
 
 		hide_controls();
 		controls.mouseenter(show_controls);
 		controls.mouseleave(hide_controls);
 
-		$('#publish-btn').click(publish_post);
+		if (!content) {
+			$('#publish-btn').click(publish_post);
+		} else {
+			$('#update-btn').click(update_post);
+		}
 		setInterval(save_post, s_interval);
 	});
 
