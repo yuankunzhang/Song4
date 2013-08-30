@@ -4,7 +4,7 @@ from flask import Flask, request, render_template
 from .config import DefaultConfig
 from .ext import db, login_manager
 from .filters import add_filters
-from .modules import frontend, account, blog
+from .modules import frontend, account, blog, comment
 
 __all__ = ['create_app']
 

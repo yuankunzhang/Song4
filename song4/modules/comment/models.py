@@ -27,3 +27,14 @@ class Comment(db.Model):
         'Post', backref=db.backref('comments', cascade='all, delete-orphan'))
     author = db.relationship(
         'User', backref=db.backref('comments', cascade='all, delete-orphan'))
+
+    def __init__(self, content, post_id, author_name, author_email, **attr):
+        self.content = content
+        self.post_id = post_id
+        self.author_name = author_name
+        self.author_email = author_email
+        self.__dict__.update(attr)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
