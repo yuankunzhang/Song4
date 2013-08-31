@@ -1,5 +1,5 @@
-var publish_url = '/blog/publish';
-var save_url = '/blog/save';
+var publish_url = '/blog/publish/';
+var save_url = '/blog/save/';
 
 var editor, controls;
 var c_hidden_left = -250;		// 控制栏隐藏的距离
@@ -26,6 +26,11 @@ function publish_post() {
 				window.location = '/';
 		}
 	});
+}
+
+function update_post() {
+	save_post();
+	window.location = '/';
 }
 
 function save_post() {

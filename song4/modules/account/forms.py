@@ -22,6 +22,10 @@ class SignUpForm(Form):
         Email(),
     ], id=u'signup-email')
 
+    username = TextField(u'Name', [
+        Required(),
+    ], id=u'signup-name')
+
     password = PasswordField(u'Password', [
         Required(),
         Length(min=6),

@@ -34,6 +34,7 @@
 {% call stacked_form('account.signup') %}
 	<legend>Sign up a new account.</legend>
 	{{ input_field(form.email) }}
+	{{ input_field(form.name) }}
 	{{ input_field(form.password) }}
 	{{ input_field(form.password_confirm) }}
 	{{ button('Sign up', type='success') }}

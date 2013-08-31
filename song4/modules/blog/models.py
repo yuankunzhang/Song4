@@ -49,14 +49,19 @@ class Post(db.Model):
     tags = association_proxy('post_tags', 'tag')
 
     def __init__(self, content, access=PostAccess.PUBLIC):
-        heading_line = content.split('\n', 1)[0]
-        self.title = heading_line[1:].strip()
-        self.content = content[len(heading_line):].strip()
+        self._set_title_and_content(content)
         self.access = access
         self.author_id = current_user.id
 
     def __repr__(self):
         return '<Post(%r)>' % self.title
+
+    def _set_title_and_content(self, content):
+        if content[0] != '#':
+            content = '# ' + content;
+        self.content = content
+        heading_line = content.split('\n', 1)[0]
+        self.title = heading_line[1:].strip()
 
     def create(self):
         """Create a new post in database"""
@@ -70,9 +75,7 @@ class Post(db.Model):
         """Edit an existing post"""
         self.date_modified = datetime.datetime.utcnow()
 
-        heading_line = content.split('\n', 1)[0]
-        self.title = heading_line[1:].strip()
-        self.content = content[len(heading_line):].strip()
+        self._set_title_and_content(content)
         self.access = access
 
         old_tags = [tag for tag in self.tags]
@@ -102,6 +105,16 @@ class Post(db.Model):
                 self.tags.append(tag)
 
         db.session.commit()
+
+    @property
+    def content_body(self):
+        """Body of the post"""
+
+        if not self.content:
+            return self.content
+
+        heading_line = self.content.split('\n', 1)[0]
+        return self.content[len(heading_line):].strip()
 
     @property
     def tag_str(self):

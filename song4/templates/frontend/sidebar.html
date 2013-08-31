@@ -1,7 +1,7 @@
 <header class="header">
 	<hgroup>
 		<h1 class="brand-title">Song 4</h1>
-		<h2 class="brand-tagline">Creating a blog layout using Pure</h2>
+		<h2 class="brand-tagline">Discover & Share.</h2>
 	</hgroup>
 
 	<nav class="nav">
@@ -17,7 +17,7 @@
 			</li>
 			<li class="nav-item">
 				{% if not current_user.is_authenticated() %}
-				<a class="pure-button" href="#">Sign in</a>
+				<a class="pure-button" href="{{ url_for('account.signin') }}">Sign in</a>
 				{% endif %}
 			</li>
 		</ul>

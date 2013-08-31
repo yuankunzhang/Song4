@@ -31,7 +31,7 @@ def add_filters(app):
 
     @app.template_filter()
     def preview(html):
-        PREVIEW_LEN = 200
+        PREVIEW_LEN = 150
         ellipsis = '<p>......</p>'
 
         if len(html) < PREVIEW_LEN:

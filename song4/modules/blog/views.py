@@ -19,7 +19,7 @@ def editor():
 @bp.route('/publish/', methods=['GET', 'POST'])
 @login_required
 def publish():
-    if request.method == POST:
+    if request.method == 'POST':
         post_id = request.form['post_id']
         content = request.form['content']
         tags = str2list(request.form['tags'])

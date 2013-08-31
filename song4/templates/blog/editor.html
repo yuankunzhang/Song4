@@ -26,7 +26,7 @@
 			</div>
 
 			<input type="hidden" name="post_id"{% if post %} value="{{ post.id }}"{% endif %}>
-			<input type="hidden" name="content"{% if post %} value="{{ post.title + post.content }}"{% endif %}>
+			<input type="hidden" name="content"{% if post %} value="{{ post.content }}"{% endif %}>
 			<legend></legend>
 		</fieldset>
 	</form>

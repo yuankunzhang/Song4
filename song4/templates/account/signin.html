@@ -32,7 +32,7 @@
 {% block content %}
 {% from 'macros/form.html' import stacked_form, input_field, button %}
 {% call stacked_form('account.signin') %}
-	<legend>Sign up a new account.</legend>
+	<legend>Sign in.</legend>
 	{{ input_field(form.email) }}
 	{{ input_field(form.password) }}
 	{{ button('Sign in', type='success') }}

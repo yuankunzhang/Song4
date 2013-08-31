@@ -29,7 +29,8 @@
 	width: 60px;
 }
 
-#controls #publish-btn {
+#controls #publish-btn,
+#controls #update-btn {
 	margin-left: 80px;
 }
 
