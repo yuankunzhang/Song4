@@ -9,11 +9,10 @@ from .models import Post
 bp = Blueprint('blog', __name__)
 
 
-@bp.route('/editor/')
-@login_required
-def editor():
+@bp.route('/demo-editor/')
+def demo_editor():
 
-    return render_template('blog/editor.html')
+    return render_template('blog/demo-editor.html')
 
 
 @bp.route('/publish/', methods=['GET', 'POST'])

@@ -3,6 +3,7 @@
 {% block css_files %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="/static/css/blog.css">
+</style>
 {% endblock %}
 
 {% block content %}
@@ -41,7 +42,7 @@
 <div id="title-indicator"></div>
 
 <script src="/static/plugins/ace/ace.js"></script>
-<script src="/static/js/editor.js"></script>
+<script src="/static/js/demo-editor.js"></script>
 <script>
 	init_page($('input[name=content]').val());
 </script>

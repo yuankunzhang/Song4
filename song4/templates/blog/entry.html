@@ -21,7 +21,7 @@
 					<header class="post-header">
 						<h1 class="post-title">{{ post.title }}</h1>
 						<p class="post-meta">
-							By {{ post.author }}
+							By {{ post.author.username }}
 						</p>
 					</header>
 
@@ -31,44 +31,46 @@
 				</section>
             </div>
 
+			<div id="comment-box">
+				<form class="pure-form pure-form-stacked">
+					<input type="hidden" name="post_id" value="{{ post.id }}">
+					<textarea name="content" placeholder="Leave a comment..."></textarea>
+					{% if not current_user.is_authenticated() %}
+					<input type="text" name="author_name" class="pure-input-1-4" placeholder="Your name">
+					<input type="text" name="author_email" class="pure-input-1-4" placeholder="Your email">
+					<input type="text" name="author_url" class="pure-input-1-4" placeholder="Your website">
+					{% endif %}
+					<button class="pure-button pure-button-primary">Submit</button>
+				</form>
+			</div>
+
 			<div class="comments">
-				<div id="comment-box">
-					<form class="pure-form pure-form-stacked">
-						<textarea name="content" placeholder="Leave a comment..."></textarea>
-						<input type="text" name="name" class="pure-input-1-4" placeholder="Your name">
-						<input type="text" name="email" class="pure-input-1-4" placeholder="Your email">
-						<input type="text" name="website" class="pure-input-1-4" placeholder="Your website">
-						<button class="pure-button pure-button-primary">Submit</button>
-					</form>
-				</div>
+				{% for comment in post.comments %}
+				<section class="comment">
+					<header class="comment-header">
+						<h3 class="comment-author">{{ comment.author_name }}</h3>
+						<p class="comment-meta">
+						</p>
+					</header>
+
+					<div class="comment-content">
+						{{ comment.content }}
+					</div>
+				</section>
+				{% endfor %}
 			</div>
 
             <footer class="footer">
-                <div class="pure-menu pure-menu-horizontal pure-menu-open">
-                    <ul>
-                        <li><a href="http://purecss.io/">About</a></li>
-                        <li><a href="http://twitter.com/yuilibrary/">Twitter</a></li>
-                        <li><a href="http://github.com/yui/pure/">Github</a></li>
-                    </ul>
-                </div>
+				{% include 'frontend/footer.html' %}
             </footer>
         </div>
     </div>
 </div>
 
-<!--<script src="/static/js/lib/yui-min.js"></script>-->
+<script src="/static/js/blog.js"></script>
 <script src="/static/plugins/google-code-prettify/prettify.js"></script>
 <script>
-/*
-YUI().use('node-base', 'node-event-delegate', function (Y) {
-    // This just makes sure that the href="#" attached to the <a> elements
-    // don't scroll you back up the page.
-    Y.one('body').delegate('click', function (e) {
-        e.preventDefault();
-    }, 'a[href="#"]');
-});
-*/
-
+$('a[href="#"]').click(function(e) { e.preventDefault(); });
 $('code').parent('pre').attr('class', 'prettyprint linenums');
 prettyPrint();
 </script>

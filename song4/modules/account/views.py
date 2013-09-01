@@ -34,6 +34,7 @@ def signin():
     return render_template('account/signin.html', form=form)
 
 
+"""
 @bp.route('/signup/', methods=['GET', 'POST'])
 def signup():
 
@@ -46,6 +47,7 @@ def signup():
         return redirect(url_for('frontend.index'))
     else:
         return render_template('account/signup.html', form=form)
+"""
 
 
 @bp.route('/signout/')
