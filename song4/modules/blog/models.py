@@ -111,7 +111,7 @@ class Post(db.Model):
         """Body of the post"""
 
         if not self.content:
-            return self.content
+            return ''
 
         heading_line = self.content.split('\n', 1)[0]
         return self.content[len(heading_line):].strip()

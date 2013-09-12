@@ -3,6 +3,7 @@ from flask import Flask, request, render_template
 
 from .config import DefaultConfig
 from .ext import db, login_manager
+from .admin import admin
 from .filters import add_filters
 from .modules import frontend, account, blog, comment
 
@@ -48,6 +49,7 @@ def config_ext(app):
 
     db.init_app(app)
     login_manager.init_app(app)
+    admin.init_app(app)
 
 
 def config_err(app):
